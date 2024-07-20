@@ -116,7 +116,6 @@ router.delete(
     "/:id",
     [
         validarJWT,
-        isPaciente,
         isAdmin,
         check("id", "Not a valid ID").isMongoId(),
         check("id").custom(existeUsuarioById),
