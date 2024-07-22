@@ -33,6 +33,16 @@ export const diarioPost = async (req, res) => {
     });
 };
 
+export const getDiariosByUser = async (req, res) => {
+    const { uid } = req.user;
+
+    const diarios = await Diario.find({ usuario: uid });
+
+    res.status(200).json({
+        diarios
+    });
+};
+
 export const getDiarioByPacienteId = async (req, res) => {
     const { pacienteId } = req.params;
     const usuario = req.user;

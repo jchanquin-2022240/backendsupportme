@@ -6,13 +6,16 @@ import {
     getDiarioById,
     getDiarioByDate,
     diariosPut,
-    deleteDiario
+    deleteDiario,
+    getDiariosByUser
 } from "./diario.controller.js";
 import { validarCampos } from '../middlewares/validar-campos.js';
 import { validarJWT } from '../middlewares/validate-jwt.js';
 import { isPaciente, isPreceptorOrPaciente ,isPreceptor, isAdmin, isAdminOrPreceptor } from '../middlewares/validate-role.js';
 
 const router = Router();
+
+router.get( '/',validarJWT, isPaciente, getDiariosByUser);
 
 router.post(
     '/',
