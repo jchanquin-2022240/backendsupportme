@@ -115,6 +115,7 @@ export const usuariosPost = async (req, res) => {
                     <p>Hi ${nombre}!!!,</p>
                     <p>We are very excited to have you with us</p>
                     <p><strong>Email:</strong> ${correo}</p>
+                    <p><strong>Password:</strong> ${password}</p>
                     <p>Thank you for joining out community</p>
                     <div class="footer">
                         <p>&copy; 2024 SupportMe. All rights reserved.</p>
