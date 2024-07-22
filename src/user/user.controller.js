@@ -258,10 +258,21 @@ export const usuarioGet = async (req = request, res = response) => {
 
 export const getUsuarioById = async (req, res) => {
     const { id } = req.params;
-    const usuario = await Usuario.findById(id);
-    res.status(200).json({
-        usuario
-    });
+
+    try {
+        const usuario = await Usuario.findById(id).populate('preceptor', 'nombre correo');
+
+        if (!usuario) {
+            return res.status(404).json({ msg: 'User not found' });
+        }
+
+        res.status(200).json({
+            usuario
+        });
+    } catch (error) {
+        console.error("Error no trae user:", error);
+        res.status(500).json({ msg: 'Error no trae user' });
+    }
 }
 
 export const getPreceptores = async (req, res = response) => {

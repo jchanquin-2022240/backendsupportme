@@ -91,10 +91,10 @@ router.post(
 );
 
 router.get(
-    "/:id",
+    '/:id',
     [
-        check("id", "Not a valid ID").isMongoId(),
-        check("id").custom(existeUsuarioById),
+        check('id', 'Not a valid ID').isMongoId(),
+        check('id').custom(existeUsuarioById),
         validarCampos
     ],
     getUsuarioById
