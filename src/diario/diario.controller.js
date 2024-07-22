@@ -33,6 +33,7 @@ export const diarioPost = async (req, res) => {
     });
 };
 
+
 export const getDiariosByUser = async (req, res) => {
     const { uid } = req.user;
 
