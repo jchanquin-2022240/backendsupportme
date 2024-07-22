@@ -203,3 +203,35 @@ export const deleteDiario = async (req, res) => {
         msg: 'Diary successfully deleted'
     });
 };
+
+export const getDiariosByPreceptor = async (req, res) => {
+    const preceptorId = req.user.uid;
+
+    try {
+        const pacientes = await Usuario.find({ preceptor: preceptorId }).select('_id');
+
+        if (pacientes.length === 0) {
+            return res.status(404).json({
+                msg: 'No patients found for this preceptor'
+            });
+        }
+
+        const pacienteIds = pacientes.map(paciente => paciente._id);
+
+        const diarios = await Diario.find({ usuario: { $in: pacienteIds } })
+            .populate({
+                path: 'usuario',
+                select: 'nombre'
+            })
+            .exec();
+
+        res.status(200).json({
+            diarios
+        });
+    } catch (error) {
+        res.status(500).json({
+            msg: 'Error retrieving diaries',
+            error: error.message
+        });
+    }
+};

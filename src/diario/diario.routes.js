@@ -6,7 +6,8 @@ import {
     getDiarioById,
     getDiarioByDate,
     diariosPut,
-    deleteDiario
+    deleteDiario,
+    getDiariosByPreceptor
 } from "./diario.controller.js";
 import { validarCampos } from '../middlewares/validar-campos.js';
 import { validarJWT } from '../middlewares/validate-jwt.js';
@@ -70,6 +71,16 @@ router.delete(
         validarCampos,
     ],
     deleteDiario
+);
+
+router.get(
+    '/preceptor/diarios',
+    [
+        validarJWT,
+        isPreceptor,
+        validarCampos
+    ],
+    getDiariosByPreceptor
 );
 
 export default router;
